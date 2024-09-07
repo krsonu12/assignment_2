@@ -4,7 +4,6 @@ import 'package:customer_app/stores/location_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import '../models/customer.dart';
 import '../stores/customer_store.dart';
 
@@ -25,24 +24,12 @@ class AddCustomerPageState extends State<AddCustomerPage> {
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
 
-  String? _imagePath;
-
-  Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(
-        () {
-          _imagePath = pickedFile.path;
-        },
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Customer')),
+      appBar: AppBar(
+        title: const Text('Add Customer'),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -85,11 +72,11 @@ class AddCustomerPageState extends State<AddCustomerPage> {
                   Text(_locationStore.geoAddress!),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: _pickImage,
+                  onPressed: _customerStore.pickImage,
                   child: const Text('Take Customer Photo'),
                 ),
-                if (_imagePath != null)
-                  Image.file(File(_imagePath!), height: 100),
+                if (_customerStore.imagePath != null)
+                  Image.file(File(_customerStore.imagePath!), height: 100),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () async {
@@ -102,7 +89,7 @@ class AddCustomerPageState extends State<AddCustomerPage> {
                         );
                         return;
                       }
-                      if (_imagePath == null) {
+                      if (_customerStore.imagePath == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Please take a photo')),
                         );
@@ -117,7 +104,7 @@ class AddCustomerPageState extends State<AddCustomerPage> {
                         longitude: _locationStore.longitude!,
                         geoAddress: _addressController.text +
                             _locationStore.geoAddress!,
-                        imagePath: _imagePath!,
+                        imagePath: _customerStore.imagePath!,
                       );
                       await _customerStore.addCustomer(customer);
                       if (!context.mounted) return;

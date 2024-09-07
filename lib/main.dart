@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'ui/login_page.dart';
 import 'ui/customer_list_page.dart';
 import 'stores/auth_store.dart';
+import 'package:customer_app/theme.dart' as theme;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Customer App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        colorScheme: theme.appColorScheme,
+        useMaterial3: true,
       ),
       home: FutureBuilder(
         future: _authStore.checkLoginStatus(),

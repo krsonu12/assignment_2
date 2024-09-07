@@ -1,5 +1,6 @@
 import 'package:customer_app/models/customer.dart';
 import 'package:customer_app/services/database_service.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 part 'customer_store.g.dart';
 
@@ -11,6 +12,9 @@ abstract class CustomerStoreBase with Store {
   CustomerStoreBase(this._databaseService) {
     loadCustomers();
   }
+
+  @observable
+  String? imagePath;
 
   @observable
   ObservableList<Customer> customers = ObservableList<Customer>();
@@ -26,5 +30,14 @@ abstract class CustomerStoreBase with Store {
   Future<void> addCustomer(Customer customer) async {
     await _databaseService.insertCustomer(customer);
     await loadCustomers();
+  }
+
+  @action
+  Future<void> pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      imagePath = pickedFile.path;
+    }
   }
 }
