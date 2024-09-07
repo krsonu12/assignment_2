@@ -116,7 +116,7 @@ class AddCustomerPageState extends State<AddCustomerPage> {
                           File(_customerStore.imagePath!),
                           height: 100,
                         ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       Primerybutton(
                           onPressed: () async {
                             if (_formKey.currentState?.validate() ?? false) {
