@@ -8,7 +8,9 @@ class CustomerStore = CustomerStoreBase with _$CustomerStore;
 abstract class CustomerStoreBase with Store {
   final DatabaseService _databaseService;
 
-  CustomerStoreBase(this._databaseService);
+  CustomerStoreBase(this._databaseService) {
+    loadCustomers();
+  }
 
   @observable
   ObservableList<Customer> customers = ObservableList<Customer>();

@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'package:customer_app/models/customer.dart';
 import 'package:customer_app/stores/auth_store.dart';
+import 'package:customer_app/stores/location_store.dart';
 import 'package:customer_app/ui/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../stores/customer_store.dart';
 import 'add_customer_page.dart';
 
@@ -20,34 +18,7 @@ class CustomerListPage extends StatefulWidget {
 class _CustomerListPageState extends State<CustomerListPage> {
   CustomerStore get _customerStore => GetIt.I<CustomerStore>();
   AuthStore get _authStore => GetIt.I<AuthStore>();
-
-  @override
-  void initState() {
-    super.initState();
-    _customerStore.loadCustomers();
-  }
-
-  Future<void> _openGoogleMaps(Customer customer) async {
-    try {
-      Position currentPosition = await Geolocator.getCurrentPosition();
-
-      final url = Uri.parse(
-          'https://www.google.com/maps/dir/?api=1&origin=${currentPosition.latitude},${currentPosition.longitude}&destination=${customer.latitude},${customer.longitude}&travelmode=driving');
-
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url);
-      } else {
-        throw 'Could not launch $url';
-      }
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error opening maps: $e'),
-        ),
-      );
-    }
-  }
+  LocationStore get _locationStore => GetIt.I<LocationStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +74,7 @@ class _CustomerListPageState extends State<CustomerListPage> {
                   size: 40,
                   color: Colors.blue,
                 ),
-                onPressed: () => _openGoogleMaps(customer),
+                onPressed: () => _locationStore.openGoogleMaps(customer),
               ),
             );
           },

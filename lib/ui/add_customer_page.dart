@@ -26,32 +26,6 @@ class AddCustomerPageState extends State<AddCustomerPage> {
   final _addressController = TextEditingController();
 
   String? _imagePath;
-  // double? _latitude;
-  // double? _longitude;
-  // String? _geoAddress;
-
-  // Future<void> _getLocation() async {
-  //   final status = await Permission.location.request();
-  //   if (status.isGranted) {
-  //     final position = await Geolocator.getCurrentPosition();
-  //     final placemarks =
-  //         await placemarkFromCoordinates(position.latitude, position.longitude);
-
-  //     setState(() {
-  //       _latitude = position.latitude;
-  //       _longitude = position.longitude;
-  //       _geoAddress =
-  //           '${placemarks.first.street}, ${placemarks.first.locality}, ${placemarks.first.country}';
-  //     });
-  //   } else {
-  //     if (!mounted) return;
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Location permission is required'),
-  //       ),
-  //     );
-  //   }
-  // }
 
   Future<void> _pickImage() async {
     final pickedFile =
