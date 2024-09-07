@@ -27,11 +27,8 @@ class _CustomerListPageState extends State<CustomerListPage> {
       appBar: AppBar(
         title: const Text('Customer List'),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.logout,
-            ),
-            onPressed: () async {
+          InkWell(
+            onTap: () async {
               await _authStore.logout();
               if (!context.mounted) return;
               Navigator.of(context).pushReplacement(
@@ -40,10 +37,17 @@ class _CustomerListPageState extends State<CustomerListPage> {
                 ),
               );
             },
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Text("LogOut"),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.logout),
+                Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: Text("LogOut"),
+                ),
+              ],
+            ),
           ),
         ],
       ),
