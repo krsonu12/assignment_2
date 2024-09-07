@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Enablebutton extends StatelessWidget {
+class Primerybutton extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
-  const Enablebutton({
+  const Primerybutton({
     super.key,
     required this.title,
     this.onPressed,

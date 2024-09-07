@@ -31,7 +31,7 @@ abstract class LocationStoreBase with Store {
       latitude = position.latitude;
       longitude = position.longitude;
       geoAddress =
-          '${placemarks.first.street}, ${placemarks.first.locality}, ${placemarks.first.country}';
+          '${placemarks.first.street},${placemarks.first.subLocality}, ${placemarks.first.locality}, ${placemarks.first.administrativeArea},${placemarks.first.country}-${placemarks.first.postalCode}';
     }
   }
 

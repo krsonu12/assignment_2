@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:customer_app/stores/auth_store.dart';
 import 'package:customer_app/stores/location_store.dart';
 import 'package:customer_app/ui/login_page.dart';
+import 'package:customer_app/widgets/primery_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -82,7 +83,8 @@ class _CustomerListPageState extends State<CustomerListPage> {
       ),
       floatingActionButton: Align(
         alignment: Alignment.bottomCenter,
-        child: FloatingActionButton.extended(
+        child: Primerybutton(
+          title: 'Add Customer',
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -90,7 +92,6 @@ class _CustomerListPageState extends State<CustomerListPage> {
               ),
             );
           },
-          label: const Text("Add Customer"),
         ),
       ),
     );

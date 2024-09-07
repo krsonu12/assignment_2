@@ -1,6 +1,6 @@
 // lib/ui/login_page.dart
 import 'package:customer_app/widgets/custom_text_filed.dart';
-import 'package:customer_app/widgets/enable_button.dart';
+import 'package:customer_app/widgets/primery_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '../stores/auth_store.dart';
@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   Center(
-                    child: Enablebutton(
+                    child: Primerybutton(
                       title: "Login",
                       onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
